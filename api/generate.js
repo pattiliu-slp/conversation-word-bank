@@ -1,13 +1,9 @@
-export const config = {
-  runtime: 'edge',
-};
-
-export default async function handler(req) {
+module.exports = async function handler(req, res) {
   if (req.method !== "POST") {
-    return new Response(JSON.stringify({ error: "Method not allowed" }), { status: 405 });
+    return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const { model, max_tokens, messages } = await req.json();
+  const { model, max_tokens, messages } = req.body;
 
   try {
     const response = await fetch("https://api.anthropic.com/v1/messages", {
@@ -21,8 +17,8 @@ export default async function handler(req) {
     });
 
     const data = await response.json();
-    return new Response(JSON.stringify(data), { status: response.status });
+    return res.status(response.status).json(data);
   } catch (error) {
-    return new Response(JSON.stringify({ error: error.message }), { status: 500 });
+    return res.status(500).json({ error: error.message });
   }
 }
