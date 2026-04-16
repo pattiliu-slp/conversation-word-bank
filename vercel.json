@@ -3,6 +3,6 @@
   "outputDirectory": "dist",
   "framework": "vite",
   "rewrites": [
-    { "source": "/api/generate", "destination": "/api/generate.mjs" }
+    { "source": "/api/(.*)", "destination": "/api/$1" }
   ]
 }
