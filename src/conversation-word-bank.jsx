@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const API_URL = "https://api.anthropic.com/v1/messages";
+const API_URL = "/api/generate";
 
 const WORD_COUNT_OPTIONS = [6, 9, 12, 18, 24];
 
